@@ -11,7 +11,16 @@ const handleLogin = () => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      window.location = './index.html';
+      const email = user.email;
+      const displayName = user.displayName;
+      const photoUrl = user.photoURL;
+      const userProfile = {
+        email,
+        displayName,
+        photoUrl,
+      };
+      localStorage.setItem("currentUser", JSON.stringify(userProfile));
+      window.location = "./index.html";
     })
     .catch((error) => {
       const errorCode = error.code;
